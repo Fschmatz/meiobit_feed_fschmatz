@@ -9,6 +9,9 @@ class Changelog{
 ''';
 
   static String changelogsOld = '''
+0.3.0
+- Added PubDate
+
 0.2.0
 - UI Created
 - Feed OK

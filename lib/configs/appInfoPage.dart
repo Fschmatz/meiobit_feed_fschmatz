@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 class AppInfoPage extends StatelessWidget {
 
   _launchGithub()  {
-    const url = ' ';
+    const url = 'https://github.com/Fschmatz/meiobit_feed_fschmatz';
     launch(url);
   }
 
@@ -23,7 +23,7 @@ class AppInfoPage extends StatelessWidget {
           const SizedBox(height: 20),
           CircleAvatar(
             radius: 55,
-            backgroundColor: Colors.pink,
+            backgroundColor: Colors.deepOrangeAccent,
             child: CircleAvatar(
               radius: 50,
               backgroundImage: AssetImage('assets/avatar.jpg'),
@@ -91,7 +91,7 @@ class AppInfoPage extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.messenger_outline),
             title: Text(
-              " ",
+              "The advance of technology is based on making it fit in so that you don't really even notice it, so it's part of everyday life.",
               style: TextStyle(fontSize: 16),
             ),
           ),

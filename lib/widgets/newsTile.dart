@@ -56,7 +56,7 @@ class _NewsTileState extends State<NewsTile> {
                           fontSize: 12.5,
                           fontWeight: FontWeight.w600,
                           color:
-                              Theme.of(context).accentColor.withOpacity(0.8)),
+                              Theme.of(context).accentTextTheme.headline1!.color),
                     ),
                   ),
                   Container(

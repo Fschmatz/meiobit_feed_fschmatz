@@ -12,9 +12,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  static const String feedUrl = 'https://www.theverge.com/rss/index.xml';
-  List<AtomItem> articlesList = [];
-  bool loading = true;
+  static const String feedUrl = 'http://feeds.feedburner.com/meiobit';
+  List<RssItem> _articlesList = [];
+  bool _loading = true;
 
   @override
   void initState() {
@@ -25,10 +25,10 @@ class _HomeState extends State<Home> {
   Future<void> getRssData() async {
     var client = http.Client();
     var response = await client.get(Uri.parse(feedUrl));
-    var channel = AtomFeed.parse(response.body);//Feed.parse(response.body);
+    var channel = RssFeed.parse(response.body);
     setState(() {
-      articlesList = channel.items!.toList();
-      loading = false;
+      _articlesList = channel.items!.toList();
+      _loading = false;
     });
     client.close();
   }
@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text('The Verge'),
+        title: Text('MeioBit'),
         actions: [
           IconButton(
               icon: Icon(
@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
       ),
       body: AnimatedSwitcher(
         duration: Duration(milliseconds: 500),
-        child: loading
+        child: _loading
             ? Center(
                 child: CircularProgressIndicator(
                   color: Theme.of(context).accentColor,
@@ -75,18 +75,17 @@ class _HomeState extends State<Home> {
                     children: [
                       ListView.separated(
                         separatorBuilder: (context, index) {
-                         return const Divider();
+                          return const Divider();
                         },
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: articlesList.length,
+                        itemCount: _articlesList.length,
                         itemBuilder: (context, index) {
                           return NewsTile(
                             feed: Feed(
-                                data: articlesList[index].published!,
-                                title: articlesList[index].title!,
-                                link: articlesList[index].links![0].href!
-                              ),
+                                data: _articlesList[index].pubDate.toString(),
+                                title: _articlesList[index].title!,
+                                link: _articlesList[index].link!),
                           );
                         },
                       ),
@@ -99,3 +98,5 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+//_articlesList[index].pubDate!.day.toString()
